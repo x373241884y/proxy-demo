@@ -1,0 +1,24 @@
+{
+  "name": "proxy-demo",
+  "version": "1.0.0",
+  "description": "proxy-demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x373241884y/proxy-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/x373241884y/proxy-demo/issues"
+  },
+  "homepage": "https://github.com/x373241884y/proxy-demo#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "koa": "^2.3.0",
+    "koa-proxy": "^0.8.0"
+  }
+}
