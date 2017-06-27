@@ -1,7 +1,3 @@
-/**
- * Created by toor on 17-6-27.
- */
-
 var express = require('express');
 var request = require('request');
 var app = express();
