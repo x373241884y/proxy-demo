@@ -1,12 +1,18 @@
 const Koa = require('koa');
-const proxy = require('koa-proxy');
-const convert = require('koa-convert');
 const app = new Koa();
-const zlib = require('zlib');
+const request = require('request');
 
-app.use(convert(proxy({
-	host: 'https://www.google.com.hk', // 目标站 点
-	jar: true, // 转发 cookie
-	followRedirect: false, // co-request 的参数，不跟随跳转
-})));
+app.use(function (ctx, next) {
+
+	return new Promise(function (resolve, reject) {
+		//modify the url in any way you want
+		let newurl = 'https://google.com/' + ctx.req.url;
+		let stream = ctx.req.pipe(request(newurl)).pipe(ctx.res);
+		stream.on('finish', function () {
+			resolve(next());
+		}).on('error', function (err) {
+			reject(err);
+		})
+	})
+});
 app.listen(3000);

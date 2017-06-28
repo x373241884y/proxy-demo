@@ -1,15 +1,11 @@
 const Koa = require('koa');
-let app = new Koa();
-var proxy = require('http-proxy').createProxyServer();
+const proxy = require('koa-proxy');
+const convert = require('koa-convert');
+const app = new Koa();
 
-app.use(async function (ctx, next) {
-	// yield to a thunk
-	await proxy.web(ctx.req, ctx.res,{changeOrigin: true,
-		target: {
-			protocol: 'https:',
-			host: 'www.google.com',
-			port: 443,
-			hostname: 'www.google.com'
-		}})
-});
+app.use(convert(proxy({
+	host: 'https://www.google.com.hk', // 目标站 点
+	jar: true, // 转发 cookie
+	followRedirect: false, // co-request 的参数，不跟随跳转
+})));
 app.listen(3000);
